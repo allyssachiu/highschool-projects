@@ -1,0 +1,54 @@
+class myTree:
+  def __init__(self, data):
+    self.root = data
+    #hold objects of other trees
+    self.left = None
+    self.right = None
+
+  def __str__(self):
+    #gets called every time a new tree is made(like init function)
+
+    #sets outstring back to nothing each time so we don't see other instances
+    outstring = ""
+
+    #if left node has a tree object in it
+    if self.left != None:
+      outstring += str(self.left)
+
+    #adds root of tree once left is empty (remember nodes are their own trees)
+    outstring += "(" + str(self.root) + ") "
+
+    #if right node has a tree object in it
+    if self.right != None:
+      outstring += str(self.right)
+
+    return outstring
+
+  def insert(self, data):
+    if data < self.root:
+      if self.left == None:
+        self.left = myTree(data)
+      else:
+        #self.left is a tree object, so insert data in that object to creat new branch/tree
+        self.left.insert(data)
+
+    else:
+      if self.right == None:
+        self.right = myTree(data)
+      else:
+        self.right.insert(data)
+
+
+a = myTree(5)
+a.insert(7)
+a.insert(9)
+a.insert(8)
+a.insert(4)
+
+print(a)
+
+print(a.root)
+print(a.left.root)
+print(a.right.root)
+print(a.right.right.root)
+print(a.right.right.left.root)
